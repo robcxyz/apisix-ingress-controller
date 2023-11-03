@@ -108,16 +108,18 @@ First, we will update the `values.yaml` file to mount the custom Plugin we creat
 You can configure the Plugin under `customPlugins` as shown below:
 
 ```yaml {title="values.yaml"}
-customPlugins:
-  enabled: true
-  plugins:
-    - name: "custom-response"
-      attrs: {}
-      configMap:
-        name: "custom-response-config"
-        mounts:
-          - key: "custom-response.lua"
-            path: "/usr/local/apisix/apisix/plugins/custom-response.lua"
+apisix:
+  customPlugins:
+    enabled: true
+    luaPath: "/opts/custom_plugins/?.lua"
+    plugins:
+      - name: "custom-response"
+        attrs: {}
+        configMap:
+          name: "custom-response-config"
+          mounts:
+            - key: "custom-response.lua"
+              path: "/opts/custom-plugins/custom-response.lua"
 ```
 
 You should also enable the Plugin by adding it to the `plugins` list:
